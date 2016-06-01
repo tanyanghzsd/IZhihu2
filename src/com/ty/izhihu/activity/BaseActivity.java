@@ -1,4 +1,4 @@
-package com.ty.izhihu.ui;
+package com.ty.izhihu.activity;
 
 import android.app.Activity;
 import android.widget.Toast;

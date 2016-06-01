@@ -23,9 +23,9 @@ public class FavoriteAdapter extends ArrayAdapter<News>{
 	private int resource;
 	private ImageLoader imageLoader = ImageLoader.getInstance();
     private DisplayImageOptions options = new DisplayImageOptions.Builder()
-            .showImageOnLoading(R.drawable.no_image)
-            .showImageOnFail(R.drawable.no_image)
-            .showImageForEmptyUri(R.drawable.no_image)
+            .showImageOnLoading(R.drawable.timg)
+            .showImageOnFail(R.drawable.timg)
+            .showImageForEmptyUri(R.drawable.timg)
             .cacheInMemory(true)
             .cacheOnDisk(true)
             .considerExifParams(true)

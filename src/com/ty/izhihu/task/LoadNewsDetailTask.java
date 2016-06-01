@@ -1,6 +1,6 @@
 package com.ty.izhihu.task;
 
-import com.ty.izhihu.app.Constants;
+import com.ty.izhihu.app.IConstants;
 import com.ty.izhihu.bean.NewsDetail;
 import com.ty.izhihu.bean.OnFinishListener;
 import com.ty.izhihu.net.Http;
@@ -25,8 +25,7 @@ public class LoadNewsDetailTask extends AsyncTask<Long, Void, NewsDetail>{
 	
 	@Override
 	protected void onPreExecute() {
-//		progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//		progressDialog.show();
+		listener.beforeTaskBeging();
 	}
 	
 	@Override
@@ -45,12 +44,38 @@ public class LoadNewsDetailTask extends AsyncTask<Long, Void, NewsDetail>{
 
 	@Override
 	protected void onPostExecute(NewsDetail mNewsDetail) {
-		mWebView.loadUrl(mNewsDetail.getShare_url());
-		Constants.NEWS_DETAIL=mNewsDetail;	
-			
-			
 		
-
+		if(listener!=null){
+			mWebView.loadUrl(mNewsDetail.getShare_url());
+			
+//			load(mNewsDetail);
+			IConstants.NEWS_DETAIL=mNewsDetail;
+			listener.afterTaskFinish();
+			
+		}	
 	}
+	
+	void load(NewsDetail mNewsDetail){
+		String headerImage;
+        if (mNewsDetail.getImage() == null || mNewsDetail.getImage() == "") {
+            headerImage = "file:///android_asset/news_detail_header_image.jpg";
+
+        } else {
+            headerImage = mNewsDetail.getImage();
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div class=\"img-wrap\">")
+                .append("<h1 class=\"headline-title\">")
+                .append(mNewsDetail.getTitle()).append("</h1>")
+                .append("<span class=\"img-source\">")
+                .append(mNewsDetail.getImage_source()).append("</span>")
+                .append("<img src=\"").append(headerImage)
+                .append("\" alt=\"\">")
+                .append("<div class=\"img-mask\"></div>");
+        String mNewsContent = "<link rel=\"stylesheet\" type=\"text/css\" href=\"news_content_style.css\"/>"
+                + "<link rel=\"stylesheet\" type=\"text/css\" href=\"news_header_style.css\"/>"
+                + mNewsDetail.getBody().replace("<div class=\"img-place-holder\">", sb.toString());
+        mWebView.loadDataWithBaseURL("file:///android_asset/", mNewsContent, "text/html", "UTF-8", null);
+    }
 	
 }

@@ -6,11 +6,11 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper{
-	private Context context;
 	private final static String DB_NAME="favorite_news.db";
 	public static final String TABLE_NAME = "daily_news_fav";
+	public static final String TABLE_SELECTION="selection_table";
 	
-    public static final int DB_VERSION = 4;
+    public static final int DB_VERSION = 8;
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_NEWS_ID = "news_id";
     public static final String COLUMN_NEWS_TITLE = "news_title";
@@ -25,7 +25,14 @@ public class DBHelper extends SQLiteOpenHelper{
     public static final String ND_COLUMN_GA_PREFIX="ga_prefix";
     public static final String ND_COLUMN_ID="id";
     public static final String ND_COLUMN_TYPE="type";
-
+    
+    
+    public static final String SELECTION__COLUMN_ID="selection_id";
+    public static final String SELECTION__COLUMN_NAME="name";
+    public static final String SELECTION__COLUMN_THUMBNAIL="thumbnail";
+    public static final String SELECTION__COLUMN_DESCRIPTION="description";
+    
+    
     public static final String DATABASE_CREATE
             = "CREATE TABLE " + TABLE_NAME
             + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -36,7 +43,7 @@ public class DBHelper extends SQLiteOpenHelper{
     public static final String DATABASE_CREATE_NEWS_DETAIL
     		= "CREATE TABLE " + TABLE_NEWS_DETAIL
     		+ "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-    		+ ND_COLUMN_ID + " INTEGER UNIQUE, "
+    		+ ND_COLUMN_ID + " INTEGER, "
     		+ ND_COLUMN_BODY + " TEXT, "
     		+ ND_COLUMN_IMAGE_SOURCE + " TEXT, "
     		+ ND_COLUMN_TITLE + " TEXT, "
@@ -44,6 +51,14 @@ public class DBHelper extends SQLiteOpenHelper{
     		+ ND_COLUMN_SHARE_URL + " TEXT, "
     		+ ND_COLUMN_GA_PREFIX + " TEXT, "
     		+ ND_COLUMN_TYPE + " TEXT);";
+    
+    public static final String DATABASE_CREATE_SELECTION_TABLE
+    		="CREATE TABLE " +TABLE_SELECTION
+    		+ "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+    	    + SELECTION__COLUMN_ID + " INTEGER, "
+    	    + SELECTION__COLUMN_NAME + " TEXT, "
+    	    + SELECTION__COLUMN_THUMBNAIL + " TEXT, "
+    	    + SELECTION__COLUMN_DESCRIPTION + " TEXT);";
     		
 
     public DBHelper(Context context) {
@@ -55,6 +70,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		// TODO Auto-generated method stub
 		db.execSQL(DATABASE_CREATE);
 		db.execSQL(DATABASE_CREATE_NEWS_DETAIL);
+		db.execSQL(DATABASE_CREATE_SELECTION_TABLE);
 	}
 
 	@Override
@@ -62,6 +78,7 @@ public class DBHelper extends SQLiteOpenHelper{
 		// TODO Auto-generated method stub
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NEWS_DETAIL);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_SELECTION);
         onCreate(db);
 	}
 
