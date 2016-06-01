@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_favorite"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/fav_normal"/>
+    
+    <item
+        android:id="@+id/action_share"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/radar_card_share"/>
+    
+
+</menu>

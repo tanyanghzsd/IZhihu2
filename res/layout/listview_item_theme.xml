@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/background_cards"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        >
+
+        <ImageView
+            android:id="@+id/theme_img"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            
+            android:padding="4dp" />
+
+        <LinearLayout 
+ 			android:layout_height="wrap_content"
+ 			android:layout_width="0dp"
+ 			android:layout_weight="1"
+ 			android:orientation="vertical"
+ 			android:layout_marginLeft="8dp"
+            >
+
+            <TextView
+                android:id="@+id/theme_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingBottom="2dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:paddingTop="2dp"
+                android:id="@+id/theme_description"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </TextView>
+            
+             />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
